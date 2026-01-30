@@ -4,21 +4,25 @@ public:
         if(nums.size() == 0) 
             return 0;
         
-        sort(nums.begin(), nums.end());
+        unordered_map<int, int>m;
+        for(int val : nums){
+            m[val]++;
+        }
         
         int ops = 0;
-        int i = 0, j = nums.size()-1;
-        while(i < j){
-            if(nums[i]+nums[j] > k)
-                j--;
-            else if(nums[i]+nums[j] < k)
-                i++;
-            else{
-                ops++;
-                i++; j--;
-            }
-        }
+        for(int x : nums){
+            int req = k - x;
+            if(m[x] > 0 && m[req] > 0){
+                if(x == req && m[x] < 2)
+                    continue;
 
+                m[x]--;
+                m[req]--;
+                ops++;
+            }
+            
+        }
+        
         return ops;
     }
 };
