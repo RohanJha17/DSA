@@ -1,7 +1,7 @@
 class Solution {
 public:
     bool isValid(vector<int>& freqS, vector<int>& freqT){
-        for(int i=0; i<256; i++){
+        for(int i=0; i<128; i++){
             if(freqS[i] < freqT[i])
                 return false;
         }
@@ -12,7 +12,7 @@ public:
         if(s.length() < t.length())
             return "";
 
-        vector<int>freqT(256,0), freqS(256,0);
+        vector<int>freqT(128,0), freqS(128,0);
         for(int i=0; i<t.length(); i++){
             freqT[t[i]]++;
         }
