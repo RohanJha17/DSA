@@ -1,39 +1,35 @@
 class Solution {
 public:
-    bool isValid(vector<int>& freqS, vector<int>& freqT){
-        for(int i=0; i<128; i++){
-            if(freqS[i] < freqT[i])
-                return false;
-        }
-
-        return true;
-    }
     string minWindow(string s, string t) {
         if(s.length() < t.length())
             return "";
 
-        vector<int>freqT(128,0), freqS(128,0);
-        for(int i=0; i<t.length(); i++){
-            freqT[t[i]]++;
+        vector<int>freq(256,0);
+        for(char ch : t){
+            freq[ch]++;
         }
 
-        int low = 0, minLen = INT_MAX, start = -1;
+        int low = 0, minLen = INT_MAX, start = -1, count = 0;
         for(int high=0; high<s.length(); high++){
-            freqS[s[high]]++;
+            if(freq[s[high]] > 0)
+                count++;
+            freq[s[high]]--;
 
-            while(isValid(freqS, freqT)){
+            while(count == t.length()){
                 int len = high-low+1;
                 if(minLen > len){
                     minLen = len;
                     start = low;
                 }
 
-                freqS[s[low]]--;
+                freq[s[low]]++;
+                if(freq[s[low]] > 0)
+                    count--;
                 low++;
             }
         }
 
-        if(minLen == INT_MAX)
+        if(start == -1)
             return "";
 
         return s.substr(start, minLen);
