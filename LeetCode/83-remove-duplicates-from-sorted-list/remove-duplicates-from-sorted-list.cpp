@@ -19,7 +19,7 @@ public:
             if(temp->val == temp->next->val){
                 ListNode* ptr = temp->next;
                 temp->next = temp->next->next;
-                delete(ptr);
+                delete ptr;
             }
             else
                 temp = temp->next;
