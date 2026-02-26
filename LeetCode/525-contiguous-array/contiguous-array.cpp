@@ -13,6 +13,7 @@ public:
             int diff = zero - one;
             if(diff == 0){
                 maxLen = max(maxLen, i+1);
+                continue;
             }
 
             if(m.find(diff) == m.end())
