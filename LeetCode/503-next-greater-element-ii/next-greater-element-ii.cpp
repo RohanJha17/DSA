@@ -7,13 +7,13 @@ public:
         stack<int> st;
         
         for(int i=2*n-1; i>=0; i--){
-            while(!st.empty() && nums[st.top()] <= nums[i%n])
+            while(!st.empty() && st.top() <= nums[i%n])
                 st.pop();
 
             if(!st.empty())
-                ans[i%n] = nums[st.top()];
+                ans[i%n] = st.top();
 
-            st.push(i%n);
+            st.push(nums[i%n]);
         }
 
         return ans;
